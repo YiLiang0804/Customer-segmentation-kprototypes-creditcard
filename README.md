@@ -10,6 +10,9 @@ It includes a documented fix for a common pitfall in clustering (**ID feature le
 
 ## Data (Availability & Academic Policy)
 This work was originally developed using a **course dataset provided by Prof. Tianxin Zou (University of Florida)** with approximately **1,000 customers**.
+The original course dataset provided by Prof. Tianxin Zou (University of Florida) is not included in this public repository.
+This repo contains a synthetic demo dataset (data/synthetic_creditcard_behavior.csv) created for reproducibility and portfolio purposes only.
+The synthetic data is not derived from the original dataset and should not be used to infer real customer behavior.
 
 **The original dataset is not included in this public repository** to respect course policy and academic integrity guidelines.  
 If you are a recruiter reviewing this repo, you can still evaluate the full workflow via:
