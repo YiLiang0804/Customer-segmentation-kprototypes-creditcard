@@ -1,4 +1,4 @@
-# Customer Segmentation (K-Prototypes) — Credit Card Behavior
+# Customer Segmentation Practice Project (K-Prototypes) — Credit Card Behavior
 
 Customer segmentation using **K-Prototypes** (mixed categorical + numeric features).  
 This repo highlights a real-world clustering pitfall (**ID feature leakage**) and shows a clean, decision-oriented segmentation workflow with a short business-style summary.
