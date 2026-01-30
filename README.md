@@ -1,46 +1,52 @@
 # Customer Segmentation (K-Prototypes) — Credit Card Behavior
 
-This project performs customer segmentation using **K-Prototypes** (mixed numeric + categorical features).  
-It includes a documented fix for a common pitfall in clustering (**ID feature leakage**) and produces segment profiling outputs that translate clusters into actionable business insights.
+Customer segmentation using **K-Prototypes** (mixed categorical + numeric features).  
+This repo highlights a real-world clustering pitfall (**ID feature leakage**) and shows a clean, decision-oriented segmentation workflow with a short business-style summary.
 
-## Overview
-- Goal: Segment customers based on credit-card behavior to support targeting, retention, and risk-aware strategy.
-- Method: K-Prototypes + scaling for numeric variables + elbow-style model selection.
-- Output: Cluster labels and a segment-level summary table (means by segment).
+## What this project demonstrates
+- Mixed-type clustering with **K-Prototypes**
+- Feature preprocessing (scaling numeric variables)
+- Choosing k using an **elbow-style** diagnostic
+- Translating clusters into **segment profiles + business actions**
+- A practical quality check: **excluding `CUST_ID` to avoid leakage**
 
-## Data (Availability & Academic Policy)
-This work was originally developed using a **course dataset provided by Prof. Tianxin Zou (University of Florida)** with approximately **1,000 customers**.
-The original course dataset provided by Prof. Tianxin Zou (University of Florida) is not included in this public repository.
-This repo contains a synthetic demo dataset (data/synthetic_creditcard_behavior.csv) created for reproducibility and portfolio purposes only.
-The synthetic data is not derived from the original dataset and should not be used to infer real customer behavior.
+## Data policy (Academic integrity)
+This project was originally developed using a course dataset provided by **Prof. Tianxin Zou (University of Florida)** (≈ 1,000 customers).  
+**The original course dataset is NOT included** in this public repository.
 
-**The original dataset is not included in this public repository** to respect course policy and academic integrity guidelines.  
-If you are a recruiter reviewing this repo, you can still evaluate the full workflow via:
-- the notebooks (data prep → modeling → profiling),
-- exported figures/tables in `/outputs`,
-- and the documented modeling decisions and fixes.
+To enable reproducibility for recruiters and portfolio review, this repo includes a **synthetic demo dataset** with the same schema:
+- `data/synthetic_creditcard_behavior.csv`
 
-> If you are a UF student in the course, use your authorized access to obtain the dataset locally and update the file path in the notebook.
+The synthetic dataset is created for demonstration only, is not derived from the course dataset, and should not be used to infer real customer behavior.
 
-## Key Pitfall & Fix: ID Feature Leakage
-A frequent clustering mistake is accidentally including a customer identifier (e.g., `customer_id`) as a feature.
-- Why it’s a problem: ID values do not represent behavior but still affect Euclidean distances, producing clusters that are hard to interpret.
-- Fix applied here: drop pure identifiers and cluster only on behavioral features (numeric + categorical).
+## Features
+- Identifier (not used for clustering): `CUST_ID`
+- Categorical: `GENDER`
+- Numeric: `BALANCE`, `PURCHASES`, `CREDIT_LIMIT`, `PAYMENTS`, `PRC_FULL_PAYMENT`
 
-## Results Snapshot (k = 4)
-Using k = 4, the notebook produces a segment summary table (means by segment) with variables such as:
-- `BALANCE`, `PURCHASES`, `CREDIT_LIMIT`, `PAYMENTS`, `PRC_FULL_PAYMENT`
-- plus a categorical proportion summary for `GENDER`
+## Key pitfall & fix: ID feature leakage
+Including identifiers (e.g., `CUST_ID`) as model inputs can distort distance calculations and produce clusters that look “stable” but are not behavior-driven.  
+This repo includes a short comparison (with vs. without ID) and keeps the final model **ID-free** for interpretability.
 
-A screenshot / exported summary table is provided in `/outputs` (or embedded below if included).
+## Results (k = 4)
+The final solution uses **k = 4** and produces:
+- Segment size distribution
+- Segment profiles (means of key KPIs by segment)
+- A short business-style recommendation section, including a **high-priority small VIP segment**
 
-## Repository Structure
-- `Notebooks/` — analysis notebooks (prep → clustering → profiling)
-- `outputs/` — exported figures and segment summary tables
-- `requirements.txt` — Python dependencies
+Key outputs are saved under:
+- `outputs/` (plots and summary tables)
 
-## How to Run
-1. Clone the repo
-2. Create environment and install dependencies:
-   ```bash
-   pip install -r requirements.txt
+## Repository structure
+- `notebooks/`
+  - `01_segmentation_kprototypes.ipynb` (main notebook)
+- `data/`
+  - `synthetic_creditcard_behavior.csv` (demo dataset)
+- `outputs/` (exported figures / segment summaries)
+- `requirements.txt`
+
+## How to run
+1) Clone the repo  
+2) Install dependencies:
+```bash
+pip install -r requirements.txt
